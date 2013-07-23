@@ -5,32 +5,38 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="/bonboard/resources/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <link rel="stylesheet" href="/bonboard/resources/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="/bonboard/resources/css/main.css">
-
-        <script src="/bonboard/resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
+<div id="this-carousel-id" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="item active">
+						<img src="/bonboard/resources/img/Bob3.jpg" alt="Carina Caterpillar" width="100%" height="50%"/>
+						</a>
+						<div class="carousel-caption">
+							<p>Valorizziamo le risorse multiculturali</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/bonboard/resources/img/Multiculturalismo.jpg" alt="Light Echo" width="100%" height="50%" />
+						</a>
+						<div class="carousel-caption">
+							<p>Light Echo From Star V838 Monocerotis</p>
+							<p><a href="http://hubblesite.org/gallery/album/entire/pr2003010i/npp/128/">Hubblesite.org &raquo;</a></p>
+						</div>
+					</div>
+				</div><!-- .carousel-inner -->
+				<!--  next and previous controls here
+				href values must reference the id for this carousel -->
+				<a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+			</div><!-- .carousel -->
+			<!-- end carousel -->
+		</div>
 <div class="container main">
             <div class="well span11 center" id="mission">
                 <!-- <div class="page-header"> -->
@@ -40,6 +46,10 @@
                 <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
             <!-- </div> -->
             </div></br>    
+            <div class="span11 center">
+            	<h2 class="oppo-lav">Mappa delle risorse multiculturali di BonBoard</h2>
+                <div id="world-map" class="well" style=" height: 400px"></div>
+            </div></br>
             <div class="span11 center">  
                 <h2 class="oppo-lav">Opportunità di lavoro</h2>
                 <ul class="thumbnails">  
@@ -97,19 +107,6 @@
                 </div>
             </div>
         </div></br></br>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
-        <script src="/bonboard/resources/js/vendor/bootstrap.min.js"></script>
-
-        <script src="/bonboard/resources/js/main.js"></script>
-
-         <script>
-        //     var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-        //     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        //     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        //     s.parentNode.insertBefore(g,s)}(document,'script'));
-        // </script>
     </body>
 </html>
         

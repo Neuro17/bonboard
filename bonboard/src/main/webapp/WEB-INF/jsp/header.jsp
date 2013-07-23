@@ -19,10 +19,10 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active">
+                    <li id="home">
                         <a href="/bonboard/home"><i class="icon-home icon-white"></i>Home</a></li>
                     <!-- <li><a href="#Home">About</a></li> -->
-                    <li class="dropdown">
+                    <li id="about" class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i><spring:message code="welcome.chisiamo" text="default text" /><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/bonboard/about/about_us">About us</a></li>
@@ -35,7 +35,7 @@
                             <li><a href="#">One more separated link</a></li> -->
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li id="servizi" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"></i><spring:message code="welcome.servizi" text="default text" /><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/bonboard/servizi/i_nostri_servizi_per_voi"><spring:message code="welcome.serviziPerVoi" text="default text" /></a></li>
@@ -43,9 +43,9 @@
                             <li><a href="/bonboard/servizi/personalizzazione_dei_servizi"><spring:message code="welcome.personalizzazioneServizi" text="default text" /></a></li>
                         </ul>
                     </li>
-                    <li class=""><a href="#"><spring:message code="welcome.offerte" text="default text" /></a></li>
-                    <li class=""><a href="#">Press Area</a></li>
-                    <li class=""><a href="#">Blog</a></li>
+                    <li id="offerte" class=""><a href="#"><spring:message code="welcome.offerte" text="default text" /></a></li>
+                    <li id="press" class=""><a href="#">Press Area</a></li>
+                    <li id="blog" class=""><a href="#">Blog</a></li>
                 </ul>
                 <form class="navbar-form pull-right">
                     <input class="span2" type="text" placeholder="Email">

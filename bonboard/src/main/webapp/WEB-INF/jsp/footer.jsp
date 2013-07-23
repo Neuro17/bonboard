@@ -25,6 +25,7 @@
 
                     <div class="span3">
                         <h5>RECENT TWEETS</h5>
+                        <div id="tweets"></div>
                     </div>
                     <div class="span3">
                         <h5>FACEBOOK</h5>

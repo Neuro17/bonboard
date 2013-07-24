@@ -20,6 +20,7 @@ jq(document).ready(function(){
 			currentLocation = href[0];
 		}
 		window.location.assign(currentLocation+"?language=it");
+		refreshCurrentPath();
 	});
 	jq('#en').click(function(){
 		currentLocation = window.location.href;
@@ -29,21 +30,38 @@ jq(document).ready(function(){
 			currentLocation = href[0];
 		}
 		window.location.assign(currentLocation+"?language=en");
+		refreshCurrentPath();
 	});
 	
 	/**
 	 * navigation bar
 	 */
 	var navbar = ['#home', '#about', '#servizi', '#offerte', '#press', '#blog'];
-	for(var i = 0; i < navbar.length && !jq(navbar[i]).hasClass('active'); i++)
-	jq(navbar[i]).removeClass('active');
+	for(var i = 0; i < navbar.length; i++){
+		jq(navbar[i]).removeClass('active');
+	}
 	currentLocation = window.location.href.split('/');
+	currentLocation = currentLocation[4].split('?');
+
 	for(i = 0; i < navbar.length; i++){
 		nav = navbar[i].split('#');
-		if(nav[1] === currentLocation[4]) {
+		if(nav[1] === currentLocation[0]) {
 			jq(navbar[i]).addClass('active');
 		}
 	}
+	
+	var lastScrollTop = 0;
+	jq(window).scroll(function(event){
+	   var st = jq(this).scrollTop();
+	   if (st > lastScrollTop){
+	       jq('.header').slideUp();
+	       
+	   } else {
+	      jq('.header').slideDown();
+
+	   }
+	   lastScrollTop = st;
+	});
 	
 	/**
 	 * tweet
@@ -59,6 +77,9 @@ jq(document).ready(function(){
 //		}
 	});
 	
+	/**
+	 * Mappe
+	 */
 	var BoB_DataArray = [30, 50, 70, 40, 60, 20, 120];
 
     var employees = 0;
@@ -93,5 +114,5 @@ jq(document).ready(function(){
 		onRegionLabelShow: function(e, el, code){
 			if(BoB_Data[code] !== undefined) el.html(el.html() + ' - BonBoard employees: ' + BoB_Data[code] + "%");
 		}
-	});	
+	});		
 });

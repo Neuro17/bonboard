@@ -10,13 +10,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
         <link rel="stylesheet" href="/bonboard/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/bonboard/resources/css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="/bonboard/resources/css/main.css">

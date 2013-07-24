@@ -57,9 +57,15 @@
         <put-attribute name="body" value="/WEB-INF/jsp/personalizzazione.jsp" />
     </definition>
     
+<<<<<<< HEAD
     <definition name="blog" extends="base.definition">
         <put-attribute name="title" value="BonBoard" />
         <put-attribute name="body" value="/WEB-INF/jsp/blog.jsp" />
+=======
+    <definition name="blogForm" extends="base.definition">
+        <put-attribute name="title" value="BonBoard" />
+        <put-attribute name="body" value="/WEB-INF/jsp/blogForm.jsp" />
+>>>>>>> 3b2b973331801043dd841bee99365c92e2142588
     </definition>
 
 </tiles-definitions>

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,6 +31,10 @@ public class Users {
 	private String fname;
 	
 	private String lname;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="gender")
+	private GenderEnum gender;
 	
 	@OneToMany(mappedBy="username",cascade=CascadeType.ALL)
 	private List<Authorities> auth;
@@ -70,6 +76,18 @@ public class Users {
 	}
 
 
+
+	public Users(String username, String password, boolean enabled,
+			String email, String fname, String lname, GenderEnum gender) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.email = email;
+		this.fname = fname;
+		this.lname = lname;
+		this.gender = gender;
+	}
 
 	public String getUsername() {
 		return username;
@@ -125,6 +143,14 @@ public class Users {
 
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+
+	public GenderEnum getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderEnum gender) {
+		this.gender = gender;
 	}
 	
 	

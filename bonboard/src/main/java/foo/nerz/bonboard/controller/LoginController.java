@@ -30,6 +30,7 @@ import foo.nerz.bonboard.BonbException;
 import foo.nerz.bonboard.dao.AuthoritiesDao;
 import foo.nerz.bonboard.dao.UserDao;
 import foo.nerz.bonboard.entity.Authorities;
+import foo.nerz.bonboard.entity.GenderEnum;
 import foo.nerz.bonboard.entity.Users;
 
 
@@ -80,12 +81,19 @@ public class LoginController {
 														@RequestParam(value="password", required=true) String password,
 														@RequestParam(value="fname", required=true) String fname,
 														@RequestParam(value="lname", required=true) String lname,
+														@RequestParam(value="gender", required=true) String gender,
 														Model model) throws BonbException {
 		logger.info("Adding User Request");
 		
 		logger.info(username);
 		
-		Users u=new Users(username, password , true, email, lname, fname);
+		GenderEnum gen = null; 
+		if(gender.compareTo("M") == 0)
+			gen = GenderEnum.M;
+		else if(gender.compareTo("F") == 0)
+			gen = GenderEnum.F;
+		
+		Users u=new Users(username, password , true, email, lname, fname, gen);
 		Authorities a=new Authorities(u, "ROLE_USER");
 		
 		userDao.addUser(u);

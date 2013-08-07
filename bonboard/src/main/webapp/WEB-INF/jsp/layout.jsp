@@ -10,16 +10,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
         <link rel="stylesheet" href="/bonboard/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="/bonboard/resources/css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="/bonboard/resources/css/main.css">
+        <link rel="stylesheet" href="/bonboard/resources/css/social.css">
 		<link rel="stylesheet" href="/bonboard/resources/css/jquery-jvectormap-1.1.1.css" media="screen" />
         <script src="/bonboard/resources/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	</head>
@@ -31,6 +25,7 @@
 		<div>
 			<script src="/bonboard/resources/js/vendor/jQuery.js"></script>
 			<script src="/bonboard/resources/js/vendor/bootstrap.min.js"></script>
+			<script src="/bonboard/resources/js/bootstrapValidation/jqBootstrapValidation.js"></script>
 			<script src="/bonboard/resources/js/vendor/tweetable.jquery.js"></script>
 			<script src="/bonboard/resources/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 			<script src="/bonboard/resources/js/vendor/world-map.js"></script>

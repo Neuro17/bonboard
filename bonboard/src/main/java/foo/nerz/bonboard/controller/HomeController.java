@@ -132,6 +132,13 @@ public class HomeController {
 		return modell;
 	}
 	
+	@RequestMapping(value = "/blog", method = RequestMethod.GET)
+	public ModelAndView blog(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		ModelAndView modell = new ModelAndView("blog");
+		return modell;
+	}
 
 	
 

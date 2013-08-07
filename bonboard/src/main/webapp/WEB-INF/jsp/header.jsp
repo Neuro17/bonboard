@@ -1,11 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
     <div class="header">
         <a href="/bonboard/home"><img src="/bonboard/resources/img/logoBoB2.png" alt="" /></a>
         <img id="it" class="language" src="/bonboard/resources/img/it.jpg">
         <img id="en" class="language" src="/bonboard/resources/img/en.jpg">
+        <nav class="pull-right">
+			<ul class="icons-set">
+				<li><a href="https://www.facebook.com/bonboardsrl?fref=ts" class="icon-facebook" target="blank"></a></li>
+				<li><a href="http://www.linkedin.com/company/2599173?goback=npv_109304284_*1_*1_OUT*4OF*4NETWORK_vvJ*5_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1&trk=prof-0-ovw-curr_pos" class="icon-linkedin" target="blank"></a></li>
+				<li><a href="http://twitter.com/Bonboardsrl" class="icon-twitter" target="blank"></a></li>
+				<li><a href="http://www.youtube.com/user/BOnBoardTV" class="icon-youtube" target="blank"></a></li>
+			</ul>
+		</nav>
     </div>
     <div class="navbar-inner">
         <div class="container">
@@ -36,7 +43,7 @@
                         </ul>
                     </li>
                     <li id="servizi" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"></i><spring:message code="welcome.servizi" text="default text" /><b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="welcome.servizi" text="default text" /><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/bonboard/servizi/i_nostri_servizi_per_voi"><spring:message code="welcome.serviziPerVoi" text="default text" /></a></li>
                             <li><a href="/bonboard/servizi/offerta_modulare"><spring:message code="welcome.offertaModulare" text="default text" /></a></li>
@@ -45,7 +52,7 @@
                     </li>
                     <li id="offerte" class=""><a href="#"><spring:message code="welcome.offerte" text="default text" /></a></li>
                     <li id="press" class=""><a href="#">Press Area</a></li>
-                    <li id="blog" class=""><a href="#">Blog</a></li>
+                    <li id="blog" class=""><a href="/bonboard/blog">Blog</a></li>
                 </ul>
                 <form class="navbar-form pull-right">
                     <input class="span2" type="text" placeholder="Email">
@@ -56,4 +63,4 @@
             </div><!--/.nav-collapse -->
         </div>
     </div>
-</div>
+</div><br><br><br><br><br><br><br>

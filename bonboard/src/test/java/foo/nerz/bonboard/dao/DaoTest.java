@@ -28,6 +28,7 @@ import foo.nerz.bonboard.dao.imp.PostDaoImp;
 import foo.nerz.bonboard.dao.imp.TipoPostDaoImp;
 import foo.nerz.bonboard.entity.Authorities;
 import foo.nerz.bonboard.entity.Comment;
+import foo.nerz.bonboard.entity.GenderEnum;
 import foo.nerz.bonboard.entity.Post;
 import foo.nerz.bonboard.entity.TipoPost;
 import foo.nerz.bonboard.entity.Users;
@@ -511,7 +512,15 @@ public class DaoTest {
 			System.out.println(c.getIdPost());
 			System.out.println(c.getCountComments());
 		}
+	}
 		
+		@Test
+	public void genderTest() throws BonbException{
+		
+		Users u=new Users("prova1", "password", true,"a","a","a",GenderEnum.F );
+		
+		usersDao.addUser(u);
+
 	}
 	
 }

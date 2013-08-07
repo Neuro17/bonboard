@@ -34,7 +34,7 @@ import com.google.gson.Gson;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

@@ -502,4 +502,16 @@ public class DaoTest {
 		
 	}
 	
+	@Test
+	public void testCountComments(){
+		
+		List<Post> p=postDao.get10PostPaged(1, 1);
+		
+		for(Post c:p){
+			System.out.println(c.getIdPost());
+			System.out.println(c.getCountComments());
+		}
+		
+	}
+	
 }

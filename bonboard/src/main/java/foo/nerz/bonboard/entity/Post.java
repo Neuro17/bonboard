@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="posts")
@@ -36,11 +37,14 @@ public class Post {
 	@Column(name="body_en")
 	private String bodyEn;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="username", referencedColumnName="username")
 	private Users username;
 	
 	private Date time;
+
+	@Transient
+	private Integer countComments;
 	
 	
 
@@ -130,6 +134,14 @@ public class Post {
 				+ titoloIta + ", titoloEn=" + titoloEn + ", bodyIta=" + bodyIta
 				+ ", bodyEn=" + bodyEn +  ", time="
 				+ time + "]";
+	}
+
+	public Integer getCountComments() {
+		return countComments;
+	}
+
+	public void setCountComments(Integer countComments) {
+		this.countComments = countComments;
 	}
 	
 	

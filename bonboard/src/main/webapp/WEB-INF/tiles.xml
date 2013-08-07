@@ -19,7 +19,7 @@
     
     <definition name="register" extends="base.definition">
         <put-attribute name="title" value="BonBoard" />
-        <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/registerNew.jsp" />
     </definition>
     
     <definition name="aboutUs" extends="base.definition">
@@ -60,6 +60,16 @@
     <definition name="blogForm" extends="base.definition">
         <put-attribute name="title" value="BonBoard" />
         <put-attribute name="body" value="/WEB-INF/jsp/blogForm.jsp" />
+    </definition>
+    
+        <definition name="registrationForm" extends="base.definition">
+        <put-attribute name="title" value="BonBoard" />
+        <put-attribute name="body" value="/WEB-INF/jsp/registrationForm.jsp" />
+    </definition>
+    
+    <definition name="blog" extends="base.definition">
+        <put-attribute name="title" value="BonBoard" />
+        <put-attribute name="body" value="/WEB-INF/jsp/blog.jsp" />
     </definition>
 
 </tiles-definitions>

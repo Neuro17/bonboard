@@ -54,8 +54,10 @@ public class LoginController {
 	public @ResponseBody ResponseEntity<String> login(Locale locale, ModelMap model) {
 		logger.info("Welcome login! The client locale is {}.", locale);
 		
+		String name =SecurityContextHolder.getContext().getAuthentication().getName();
+	     
 		
-		return createJsonResponse("Authenticated");
+		return createJsonResponse(name);
 	}
 	
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)

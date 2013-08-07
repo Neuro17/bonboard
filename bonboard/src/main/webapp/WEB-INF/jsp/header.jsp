@@ -1,10 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
     <div class="header">
         <a href="/bonboard/home"><img src="/bonboard/resources/img/logoBoB2.png" alt="" /></a>
         <img id="it" class="language" src="/bonboard/resources/img/it.jpg">
         <img id="en" class="language" src="/bonboard/resources/img/en.jpg">
+        <nav class="pull-right">
+			<ul class="icons-set">
+				<li><a href="https://www.facebook.com/bonboardsrl?fref=ts" class="icon-facebook" target="blank"></a></li>
+				<li><a href="http://www.linkedin.com/company/2599173?goback=npv_109304284_*1_*1_OUT*4OF*4NETWORK_vvJ*5_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1&trk=prof-0-ovw-curr_pos" class="icon-linkedin" target="blank"></a></li>
+				<li><a href="http://twitter.com/Bonboardsrl" class="icon-twitter" target="blank"></a></li>
+				<li><a href="http://www.youtube.com/user/BOnBoardTV" class="icon-youtube" target="blank"></a></li>
+			</ul>
+		</nav>
     </div>
     <div class="navbar-inner">
         <div class="container">

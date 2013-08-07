@@ -11,9 +11,7 @@ public class PostValidation {
 	private String titleEng;
 	@NotEmpty  
 	@Size(min = 10, max = 2000)
-	private String bodyEng;
-	
-	
+	private String bodyEng;	
 	
 	public String getTitleEng() {
 		return titleEng;

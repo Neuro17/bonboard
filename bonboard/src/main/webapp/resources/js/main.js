@@ -1,41 +1,34 @@
 var jq = jQuery.noConflict();
 
-jq(document).ready(function(){
-	/**
-	 * slider
-	 */
+function startSlider(){
 	jq('.carousel').carousel({  
 		  interval: 3000
-		});
-	
-	/**
-	 * switch it/en
-	 */
-	var currentLocation, href;
-	jq('#it').click(function(){
-		currentLocation = window.location.href;
-		if(currentLocation.indexOf("it") > 0) return;
-		if(currentLocation.indexOf("en") > 0) {
-			href = currentLocation.split('?');
-			currentLocation = href[0];
-		}
-		window.location.assign(currentLocation+"?language=it");
-		refreshCurrentPath();
 	});
-	jq('#en').click(function(){
-		currentLocation = window.location.href;
-		if(currentLocation.indexOf("en") > 0) return;
-		if(currentLocation.indexOf("it") > 0) {
-			href = currentLocation.split('?');
-			currentLocation = href[0];
+}
+
+function switchLang(caller){
+	var currentLocation, href, newLocation;
+	currentLocation = window.location.href;
+	if((currentLocation.indexOf("it") > 0 && caller == "it") || (currentLocation.indexOf("en") > 0 && caller == "en")) 
+		return;
+	else {
+		if(currentLocation.indexOf("it") > 0 && caller == "en"){
+			newLocation = "?language=en";
 		}
-		window.location.assign(currentLocation+"?language=en");
-		refreshCurrentPath();
-	});
-	
-	/**
-	 * navigation bar
-	 */
+		else if(currentLocation.indexOf("en") > 0 && caller == "it"){
+			newLocation = "?language=it";
+		}
+		else if(caller == "it")
+			newLocation = "?language=it";
+		else
+			newLocation = "?language=en";
+		href = currentLocation.split('?');
+		currentLocation = href[0];
+		window.location.assign(currentLocation + newLocation);
+	} 
+};
+
+function refreshActiveClass(){
 	var navbar = ['#home', '#about', '#servizi', '#offerte', '#press', '#blog'];
 	for(var i = 0; i < navbar.length; i++){
 		jq(navbar[i]).removeClass('active');
@@ -49,23 +42,9 @@ jq(document).ready(function(){
 			jq(navbar[i]).addClass('active');
 		}
 	}
-	
-	var lastScrollTop = 0;
-	jq(window).scroll(function(event){
-	   var st = jq(this).scrollTop();
-	   if (st > lastScrollTop){
-	       jq('.header').slideUp();
-	       
-	   } else {
-	      jq('.header').slideDown();
+}
 
-	   }
-	   lastScrollTop = st;
-	});
-	
-	/**
-	 * tweet
-	 */
+function startTwitterConnection(){
 	jq('#tweets').tweetable({
 		html5: true,
 		username: '@BONBOARDsrl',
@@ -76,43 +55,86 @@ jq(document).ready(function(){
 //			jq('time').timeago();
 //		}
 	});
-	
-	/**
-	 * Mappe
-	 */
-	var BoB_DataArray = [30, 50, 70, 40, 60, 20, 120];
+}
 
+function dataMapFormatting(data){
     var employees = 0;
-    console.log(BoB_DataArray.length);
-    for(i = 0; i < BoB_DataArray.length; i++) {
-      employees += BoB_DataArray[i];
+    for(var i = 0; i < data.length; i++) {
+      employees += data[i];
     }
-    for(i = 0; i < BoB_DataArray.length; i++) {
-      var perc = (BoB_DataArray[i] / employees * 100).toFixed(0);
-      BoB_DataArray[i] = perc;
+    for(i = 0; i < data.length; i++) {
+      var perc = (data[i] / employees * 100).toFixed(0);
+      data[i] = perc;
     }
 
     var BoB_Data = {
-		"US": BoB_DataArray[0],
-		"CA": BoB_DataArray[1],
-		"RU": BoB_DataArray[2],
-		"BR": BoB_DataArray[3],
-		"FR": BoB_DataArray[4],
-		"DE": BoB_DataArray[5],
-		"IN": BoB_DataArray[6],
+		"US": data[0],
+		"CA": data[1],
+		"RU": data[2],
+		"BR": data[3],
+		"FR": data[4],
+		"DE": data[5],
+		"IN": data[6],
 	};
+    return BoB_Data;
+}
 
+function drawMap(data){
 	jq('#world-map').vectorMap({
 		map: 'world_mill_en',
 		series: {
 		regions: [{
-			values: BoB_Data,
+			values: data,
 			scale: ['#C8EEFF', '#0071A4'],
 			normalizeFunction: 'polynomial'
 		}]
 		},
 		onRegionLabelShow: function(e, el, code){
-			if(BoB_Data[code] !== undefined) el.html(el.html() + ' - BonBoard employees: ' + BoB_Data[code] + "%");
+			if(data[code] !== undefined) 
+				el.html(el.html() + ' - BonBoard employees: ' + data[code] + "%");
 		}
-	});		
+	});
+}
+
+jq(document).ready(function(){
+	var itaBtn = jq('#it');
+	var enBtn = jq('#en');
+	var data = [30, 50, 70, 40, 60, 20, 120];
+	var mapData;
+	
+	startSlider();
+	startTwitterConnection();
+	refreshActiveClass();
+	mapData = dataMapFormatting(data);
+	drawMap(mapData);
+	
+	itaBtn.click(function(){
+		switchLang("it");
+	});
+	
+	enBtn.click(function(){
+		switchLang("en");
+	});	
+	
+	var LIMIT = 4, START = 0;
+	var lastScrollTop = START, speedUp = START, speedDown = START;
+	jq(window).scroll(function(event){
+	   var st = jq(this).scrollTop();
+	   if (st > lastScrollTop){
+		   speedDown++;
+		   if(speedDown > LIMIT){
+			   jq('.header').slideUp();
+			   speedUp = speedDown = START;
+		   }
+	       
+	   } else {
+		   speedUp++;
+		   if(speedUp > LIMIT){
+			   jq('.header').slideDown();
+			   speedUp = speedDown = START;
+		   }
+
+	   }
+	   lastScrollTop = st;
+	});
 });

@@ -47,13 +47,13 @@
 }
 
 .navbar .btn{
-	background:#97B85C !important;  
+	/*background:#97B85C !important;*/  
 	font-size:13px;
 	padding:4px 10px;
 }
 
 .navbar .btn:hover{
-	background:#a0ce4e !important;
+	/*background:#a0ce4e !important;*/
 }
 
 .navbar .caret{
@@ -233,6 +233,11 @@ i[class*=" icon-"] {
 
 div[data-target*="div"]:hover {
 	cursor: pointer;
+}
+
+#tweets{
+	list-style-image: url('../img/icon/twitter_alt.svg');
+	font-size: 40px;
 }
 
 

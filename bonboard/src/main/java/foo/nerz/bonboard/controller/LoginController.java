@@ -61,6 +61,16 @@ public class LoginController {
 		return createJsonResponse(name);
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<String> logout(Locale locale, ModelMap model) {
+		logger.info("Welcome logout! The client locale is {}.", locale);
+		
+//		String name =SecurityContextHolder.getContext().getAuthentication().getName();
+	     
+		
+		return createJsonResponse(true);
+	}
+	
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<String> loginerror(ModelMap model) {
  

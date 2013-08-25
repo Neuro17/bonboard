@@ -7,10 +7,13 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
@@ -42,6 +45,8 @@ public class ContentController {
 //		logger.debug(locale.getDisplayCountry());
 //		logger.debug(locale.getLanguage());
 		
+		//TODO supporto per la pagine variabile nella req ?page=1
+		
 		List<Post> blog=postDao.get10PostPaged(1, 1);
 		
 		List<Content> contents = new ArrayList<Content>();
@@ -50,17 +55,13 @@ public class ContentController {
 			contents.add(new Content(c, locale.getLanguage()));
 		}
 		
-//		for(Content c : contents){
-//			System.out.println(c.getBody());
-//			System.out.println(c.getnComments());
-//			System.out.println(c.getTitle());
-//			System.out.println(c.getUser());
-//			System.out.println(c.getTime());
-//		}
+
 		
 		
 		
 		model.addAttribute("contents", contents);
+		
+		//TODO supporto per la paginazione nella jsp
 		
 //		for(Post p : blog){
 //			System.out.println(p.getTitoloIta());
@@ -102,6 +103,31 @@ public class ContentController {
 		
 	  return "contact";
 	 }
+	
+	
+	/*
+	 * Modificha l'header in base al login.
+	 * L'autenticazione fa ricaricare automaticamente la pagina
+	 * corrente
+	 */
+	
+	
+	private ModelAndView setHeader(ModelAndView model){
+		if(getUsers() == null)model.addObject("authenticated",Boolean.FALSE);
+		else{
+			model.addObject("authenticated",Boolean.TRUE);
+			model.addObject("username",getUsers().getUsername());
+		}
+		return model;
+	}
+	
+	 private User getUsers(){
+			if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof String){
+				return null;
+			}else{
+				return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			}
+	    }
 	
 
 }

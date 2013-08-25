@@ -138,3 +138,36 @@ jq(document).ready(function(){
 	   lastScrollTop = st;
 	});
 });
+
+
+var user=jq("#user");
+var pass=jq("#pass");
+var logButton = jq("#logButt");
+var logOutButton = jq("#logOutButt");
+
+logOutButton.on('click',function(){
+	jq.post("/bonboard/j_spring_security_logout",
+			function(data){
+		console.log(data);
+		 location.reload();
+	});
+});
+
+logButton.on('click', function(){
+	console.log(user.val()+" "+pass.val() );
+	//TODO quando ci si trova non nella radice del sito la richiesta contiene anche i un residuo del path
+	jq.post("/bonboard/j_spring_security_check",
+			{ 	j_username: user.val() , j_password: pass.val() },
+				function(data){
+					console.log(data);
+					 location.reload();
+					//TODO quando loggato fare una get alla pagina corrente così l'header si sistema!
+			});
+//				$(function() {
+//					$.post("request/getUser",
+//								
+//									function(data){console.log("username returned: "+data);}
+//							  	, 'json');
+//				});
+
+			});

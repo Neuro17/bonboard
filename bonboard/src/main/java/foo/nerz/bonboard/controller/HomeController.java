@@ -1,19 +1,17 @@
 package foo.nerz.bonboard.controller;
 
 import java.io.File;
-
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.google.gson.Gson;
+
+import foo.nerz.bonboard.entity.Users;
 
 
 
@@ -53,91 +52,88 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "home", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
+	public ModelAndView home(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.debug("##### Auth "+SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+
+		ModelAndView model = new ModelAndView("home");
+	
 		
-		ModelAndView modell = new ModelAndView("home");
-		return modell;
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-		
+		return setHeader(model);
+
 		
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView loregistergin(Locale locale, Model model) {
+	public ModelAndView loregistergin(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("register");
-		return modell;
+		ModelAndView model = new ModelAndView("register");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/about/about_us", method = RequestMethod.GET)
-	public ModelAndView aboutUs(Locale locale, Model model) {
+	public ModelAndView aboutUs(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("aboutUs");
-		return modell;
+		ModelAndView model = new ModelAndView("aboutUs");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/about/advisory", method = RequestMethod.GET)
-	public ModelAndView advisory(Locale locale, Model model) {
+	public ModelAndView advisory(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("advisory");
-		return modell;
+		ModelAndView model = new ModelAndView("advisory");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/about/partners", method = RequestMethod.GET)
-	public ModelAndView partners(Locale locale, Model model) {
+	public ModelAndView partners(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("partners");
-		return modell;
+		ModelAndView model = new ModelAndView("partners");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/about/staff", method = RequestMethod.GET)
-	public ModelAndView staff(Locale locale, Model model) {
+	public ModelAndView staff(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("staff");
-		return modell;
+		ModelAndView model = new ModelAndView("staff");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/servizi/i_nostri_servizi_per_voi", method = RequestMethod.GET)
-	public ModelAndView servizi(Locale locale, Model model) {
+	public ModelAndView servizi(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("servizi");
-		return modell;
+		ModelAndView model = new ModelAndView("servizi");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/servizi/offerta_modulare", method = RequestMethod.GET)
-	public ModelAndView modulare(Locale locale, Model model) {
+	public ModelAndView modulare(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("modulare");
-		return modell;
+		ModelAndView model = new ModelAndView("modulare");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/servizi/personalizzazione_dei_servizi", method = RequestMethod.GET)
-	public ModelAndView personalizzazione(Locale locale, Model model) {
+	public ModelAndView personalizzazione(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("personalizzazione");
-		return modell;
+		ModelAndView model = new ModelAndView("personalizzazione");
+		return setHeader(model);
 	}
 	
 	@RequestMapping(value = "/blog", method = RequestMethod.GET)
-	public ModelAndView blog(Locale locale, Model model) {
+	public ModelAndView blog(Locale locale) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		ModelAndView modell = new ModelAndView("blog");
-		return modell;
+		ModelAndView model = new ModelAndView("blog");
+		return setHeader(model);
 	}
 
 	
@@ -154,8 +150,21 @@ public class HomeController {
 	
 	
 	
+	/*
+	 * Modificha l'header in base al login.
+	 * L'autenticazione fa ricaricare automaticamente la pagina
+	 * corrente
+	 */
 	
 	
+	private ModelAndView setHeader(ModelAndView model){
+		if(getUsers() == null)model.addObject("authenticated",Boolean.FALSE);
+		else{
+			model.addObject("authenticated",Boolean.TRUE);
+			model.addObject("username",getUsers().getUsername());
+		}
+		return model;
+	}
     
     
     private ResponseEntity<String> createJsonResponse( Object o )
@@ -166,11 +175,12 @@ public class HomeController {
         return new ResponseEntity<String>( json, headers, HttpStatus.CREATED );
     }
     
-//    private Users getUsers(){
-//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//	    String name = user.getUsername(); //get logged in username
-//	    Users u=new Users(user.getUsername(),user.getPassword(),user.isEnabled(),null);
-//	    return u;
-//    }
+    private User getUsers(){
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof String){
+			return null;
+		}else{
+			return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}
+    }
 	
 }

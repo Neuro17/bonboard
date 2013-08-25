@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
     <div class="header">
         <a href="/bonboard/home"><img src="/bonboard/resources/img/logoBoB2.png" alt="" /></a>
@@ -54,12 +55,29 @@
                     <li id="press" class=""><a href="#">Press Area</a></li>
                     <li id="blog" class=""><a href="/bonboard/blog">Blog</a></li>
                 </ul>
-                <form class="navbar-form pull-right">
-                    <input class="span2" type="text" placeholder="Email">
-                    <input class="span2" type="password" placeholder="Password">
-                    <button type="submit" class="btn">Sign in</button>
-                    <a href="/bonboard/register"><spring:message code="welcome.registrati" text="default text" /></a>
-                </form>
+<!--                 <form class="navbar-form pull-right"> -->
+<!--                     <input class="span2" type="text" placeholder="Email"> -->
+<!--                     <input class="span2" type="password" placeholder="Password"> -->
+<!--                     <button type="submit" class="btn">Sign in</button> -->
+                    
+<!--                 </form> -->
+   <c:choose>
+    <c:when test="${authenticated}" >
+         ${username}
+         <button id="logOutButt" type="button" class="btn">Logout</button>
+<%--          <a href="<c:url value="j_spring_security_logout" />" > </a> --%>
+    </c:when>
+    <c:otherwise>
+        <form class="navbar-form pull-right">
+                            <input id="user" class="span2" type="text" placeholder="Username">
+                            <input id="pass" class="span2" type="password" placeholder="Password">                           
+                                        <button id="logButt" type="button" class="btn">Sign in</button>
+                <a href="/bonboard/register"><spring:message code="welcome.registrati" text="default text" /></a>
+                        </form>
+    </c:otherwise>
+</c:choose>
+                
+
             </div><!--/.nav-collapse -->
         </div>
     </div>

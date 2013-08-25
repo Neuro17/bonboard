@@ -12,7 +12,7 @@
          
 
         <form-login  default-target-url="/login" authentication-failure-url="/loginfailed"/><!-- login-page="/login" -->
-<!--         <logout logout-success-url="/login" /> -->
+        <logout logout-success-url="/logout" />
     </http>
 
 <!--     <authentication-manager> -->

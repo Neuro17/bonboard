@@ -14,11 +14,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 
 
@@ -32,12 +32,13 @@ import foo.nerz.bonboard.dao.UserDao;
 import foo.nerz.bonboard.entity.Authorities;
 import foo.nerz.bonboard.entity.GenderEnum;
 import foo.nerz.bonboard.entity.Users;
+import foo.nerz.bonboard.util.GenericController;
 
 
 //TODO controllare i redirect con il login e l'autenticazione
 
 @Controller
-public class LoginController {
+public class LoginController extends GenericController {
 	
 	
 	@Autowired
@@ -45,15 +46,12 @@ public class LoginController {
 	@Autowired
 	AuthoritiesDao authDao;
 	
-	Gson gson = new Gson();
-	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<String> login(Locale locale, ModelMap model) {
-		logger.info("Welcome login! The client locale is {}.", locale);
+		
 		
 		String name =SecurityContextHolder.getContext().getAuthentication().getName();
 	     
@@ -63,7 +61,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<String> logout(Locale locale, ModelMap model) {
-		logger.info("Welcome logout! The client locale is {}.", locale);
+		
 		
 //		String name =SecurityContextHolder.getContext().getAuthentication().getName();
 	     
@@ -161,20 +159,6 @@ public class LoginController {
 	}
 	
 	
-    private ResponseEntity<String> createJsonResponse( Object o )
-    {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        String json = gson.toJson( o );
-        return new ResponseEntity<String>( json, headers, HttpStatus.CREATED );
-    }
-	
-	
-  private Users getUsers(){
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    String name = user.getUsername(); //get logged in username
-	    Users u=userDao.findById(name);
-	    return u;
-  }
+
 
 }

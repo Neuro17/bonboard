@@ -54,6 +54,9 @@
                     <li id="offerte" class=""><a href="#"><spring:message code="welcome.offerte" text="default text" /></a></li>
                     <li id="press" class=""><a href="#">Press Area</a></li>
                     <li id="blog" class=""><a href="/bonboard/blog">Blog</a></li>
+                    <c:if test="${admin}">
+                    	<li id="admin" class=""><a href="/bonboard/admin/dashboard">Admin</a></li>
+                    </c:if>
                 </ul>
 <!--                 <form class="navbar-form pull-right"> -->
 <!--                     <input class="span2" type="text" placeholder="Email"> -->

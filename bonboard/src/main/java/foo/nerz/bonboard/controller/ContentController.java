@@ -20,14 +20,13 @@ import com.google.gson.Gson;
 import foo.nerz.bonboard.dao.PostDao;
 import foo.nerz.bonboard.entity.Content;
 import foo.nerz.bonboard.entity.Post;
+import foo.nerz.bonboard.util.GenericController;
 
 @Controller
 @RequestMapping("/content")
-public class ContentController {
+public class ContentController extends GenericController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	Gson gson = new Gson();
+
 	
 	@Autowired
 	PostDao postDao;
@@ -39,7 +38,7 @@ public class ContentController {
 	@RequestMapping("/blog")
 	 public String blog(Locale locale, Model model)
 	 {
-		logger.debug("Welcome blog! The client locale is {}.", locale);
+		
 		
 //		logger.debug(locale.getCountry());
 //		logger.debug(locale.getDisplayCountry());
@@ -104,30 +103,6 @@ public class ContentController {
 	  return "contact";
 	 }
 	
-	
-	/*
-	 * Modificha l'header in base al login.
-	 * L'autenticazione fa ricaricare automaticamente la pagina
-	 * corrente
-	 */
-	
-	
-	private ModelAndView setHeader(ModelAndView model){
-		if(getUsers() == null)model.addObject("authenticated",Boolean.FALSE);
-		else{
-			model.addObject("authenticated",Boolean.TRUE);
-			model.addObject("username",getUsers().getUsername());
-		}
-		return model;
-	}
-	
-	 private User getUsers(){
-			if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof String){
-				return null;
-			}else{
-				return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			}
-	    }
 	
 
 }

@@ -155,13 +155,13 @@ logOutButton.on('click',function(){
 
 logButton.on('click', function(){
 	console.log(user.val()+" "+pass.val() );
-	//TODO quando ci si trova non nella radice del sito la richiesta contiene anche i un residuo del path
 	jq.post("/bonboard/j_spring_security_check",
 			{ 	j_username: user.val() , j_password: pass.val() },
 				function(data){
 					console.log(data);
+					
 					 location.reload();
-					//TODO quando loggato fare una get alla pagina corrente così l'header si sistema!
+					
 			});
 //				$(function() {
 //					$.post("request/getUser",

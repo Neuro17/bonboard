@@ -1,224 +1,152 @@
 $(document).ready(function(){
 	var $emailSignUp = $('#email'),
-		$hintSignUp = $('#hintsignup'),
 		$username = $('#username'),
 		$signBtn = $('#signBtn'),
-		$existUsr = $('#hintExistUsername'),
-		$existEmail = $('#hintExistEmail'),
-		$passSignUp = $('#password'),
+		$password = $('#password'),
+		$cpassword = $('#cpassword'),
 		$fName = $('#fname'),
 		$lName = $('#lname'),
-		gen;
-	
-	$("#signup").validate({
-		rules:{
-			fname:"required",
-			lname:"required",
-			username:"required",
-			email:{
-				required:true,
-				email: true
-			},
-			password:{
-				required:true,
-				minlength: 8
-			},
-			cpassword:{
-				required:true,
-				equalTo: "#password"
-			},
-		},
-		errorClass: "help-inline",
-		
-		invalidHandler: function(event, validator) {
-		    // 'this' refers to the form
-		    var errors = validator.numberOfInvalids();
-		    if(errors == 0){
-		    $signBtn.on('click', function(){
-				if($('#male').hasClass('active'))
-					gen = "M";
-				else if($('#female').hasClass('active'))
-					gen = "F";
-				else 
-					gen = "";
-				console.log(errors);
-				$(function() {
-					$.post("request/newUser",
-								{ 	username: $username.val(),
-									email: $emailSignUp.val(),
-									password: $passSignUp.val(),
-									fname: $fName.val(),
-									lname: $lName.val(),
-									gender: gen,
-									},
-									function(data){
-//										$('#toLogin')[0].click();								
-//										var n = noty({
-//											text: 'The user '+$username.val()+' created',
-//											type:'success',
-//											layout: 'bottomRight',
-//									  		theme: 'defaultTheme'
-//											});
-										console.log("Utente inserito");
-								}
-							  	, 'json');
-				});
-			});
+		emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+		mailErr = null,
+		userErr = null,
+		gen = "";
 
-		    }
-		    else console.error(errors);
-		  }
-		
-	});
-	
-//	$signBtn.attr('disabled','disabled');
-	
 	$username.on('blur', function(){
-		$(function() {
-			// Call a URL and pass two arguments
-			// Also pass a call back function
-			// See http://api.jquery.com/jQuery.post/
-			// See http://api.jquery.com/jQuery.ajax/
-			// You might find a warning in Firefox: Warning: Unexpected token in attribute selector: '!' 
-			// See http://bugs.jquery.com/ticket/7535
-			$.get("existUsername",
-						{ 	username: $username.val()},
-							function(data){
-								// data contains the result
-								// Assign result to the sum id
-					  			// It's works ;)
-					  			if(data){
-					  				console.log('username già esistente');
-					  				var error = "username already used";
-					  				$existUsr.html(error);
-					  				
-					  				}
-				  				else {
-					  				$signBtn.removeAttr('disabled');
-				  				}
-						}
-					  	, 'json');
+		var label = $('#userlabel');
+		checkUser()
+		.done(function(r) {
+			if(r){
+				userErr = true;
+				label.removeClass("hidden");
+				label.text("This username already exist");
+			}
+			else {
+				userErr = false;
+				label.addClass("hidden");
+			}
 		});
+
 	});
-	
-//	$emailLogin.on('blur', function(){
-//		$hintLogin.css('display', 'none');
-//		$(this).mailcheck({
-//			suggested: function(element, suggestion){
-//				if(!$hintLogin.html()) {
-//		        // First error - fill in/show entire hint element
-//		        var suggestion = "Did you mean <span class='suggestion'>" +
-//		                          "<span class='address'>" + suggestion.address + "</span>"
-//		                          + "@<a href='#' class='domain'>" + suggestion.domain + 
-//		                          "</a></span>?";
-//		                          
-//		        $hintLogin.html(suggestion).fadeIn(150);
-//		      	} 
-//		      	else {
-//			        // Subsequent errors
-//			        $(".address").html(suggestion.address);
-//			        $(".domain").html(suggestion.domain);
-//			        
-//		      	}
-//			}
-//		});
-//		$hintLogin.on('click', '.domain', function() {
-//		  // On click, fill in the field with the suggestion and remove the hint
-//		  $emailLogin.val($(".suggestion").text());
-//		  $hintLogin.fadeOut(200, function() {
-//		    $(this).empty();
-//		  });
-//		  return false;
-//		});
-//	});
-	
 	
 	$emailSignUp.on('blur', function(){
-		$(function() {
-			// Call a URL and pass two arguments
-			// Also pass a call back function
-			// See http://api.jquery.com/jQuery.post/
-			// See http://api.jquery.com/jQuery.ajax/
-			// You might find a warning in Firefox: Warning: Unexpected token in attribute selector: '!' 
-			// See http://bugs.jquery.com/ticket/7535
-			$.get("existMail",
-						{ 	mail: $emailSignUp.val()},
-							function(data){
-								// data contains the result
-								// Assign result to the sum id
-					  			// It's works ;)
-					  			if(data){
-					  				console.log('email già esistente');
-					  				var error = "email already used";
-					  				$existEmail.html(error);
-					  				
-					  				}
-				  				else {
-					  				$signBtn.removeAttr('disabled');
-				  				}
-						}
-					  	, 'json');
+		var label = $('#maillabel');
+		checkMail()
+		.done(function(r) {
+			if(r){
+				mailErr = true;
+				label.removeClass("hidden");
+				label.text("This mail already exist");
+			}
+			else{ 
+				mailErr = false;
+				label.addClass("hidden");
+			}
 		});
-		
-		$hintSignUp.css('display', 'none');
-//		$(this).mailcheck({
-//			suggested: function(element, suggestion){
-//				if(!$hintSignUp.html()) {
-//		        // First error - fill in/show entire hint element
-//		        var suggestion = "Did you mean <span class='suggestion'>" +
-//		                          "<span class='address'>" + suggestion.address + "</span>"
-//		                          + "@<a href='#' class='domain'>" + suggestion.domain + 
-//		                          "</a></span>?";
-//		                          
-//		        $hintSignUp.html(suggestion).fadeIn(150);
-//		      	} 
-//		      	else {
-//			        // Subsequent errors
-//			        $(".address").html(suggestion.address);
-//			        $(".domain").html(suggestion.domain);
-//			        
-//		      	}
-//			}
-//		});
-//		$hintSignUp.on('click', '.domain', function() {
-//		  // On click, fill in the field with the suggestion and remove the hint
-//		  $emailSignUp.val($(".suggestion").text());
-//		  $hintSignUp.fadeOut(200, function() {
-//		    $(this).empty();
-//		  });
-//		  return false;
-//		});
 	});
 	
-//	$signBtn.on('click', function(){
-//		if($('#male').hasClass('active'))
-//			gen = "M";
-//		else if($('#female').hasClass('active'))
-//			gen = "F";
-//		else 
-//			gen = "fsd";
-//		console.log(errors);
-//		$(function() {
-//			$.post("request/newUser",
-//						{ 	username: $username.val(),
-//							email: $emailSignUp.val(),
-//							password: $passSignUp.val(),
-//							fname: $fName.val(),
-//							lname: $lName.val(),
-//							gender: gen,
-//							},
-//							function(data){
-////								$('#toLogin')[0].click();								
-////								var n = noty({
-////									text: 'The user '+$username.val()+' created',
-////									type:'success',
-////									layout: 'bottomRight',
-////							  		theme: 'defaultTheme'
-////									});
-//								console.log("Utente inserito");
-//						}
-//					  	, 'json');
-//		});
-//	});
+	
+		
+	$signBtn.on('click', function(){		
+		var user = $.trim($username.val()),
+			email = $.trim($emailSignUp.val()),
+			password = $.trim($password.val()),
+			cpassword = $.trim($cpassword.val()),
+			fname = $.trim($fName.val()),
+			lname = $.trim($lName.val());
+		
+		if($('#male').hasClass('active'))
+			gen = "M";
+		else if($('#female').hasClass('active'))
+			gen = "F";
+		
+		if(validateForm(fname, lname, user, email, password, cpassword) && !mailErr && !userErr){
+			registerNewUser()
+			.done(function(r){
+				if(r)
+//					window.location.replace("home"); //reindirizza alla home
+			})
+			.fail(function(){
+				//TODO
+			});
+		}
+		if(mailErr)
+			$('#maillabel').removeClass("hidden");
+		if(userErr)
+			$('#userlabel').removeClass("hidden");
+	});
+	
+	function checkUser() {
+	    return $.ajax({
+	        url: 'existUsername',
+	        data: {
+	            username: $username.val()
+	        },
+	        type: 'GET',
+	        dataType: 'json'
+	    });
+	}
+	
+	function checkMail() {
+	    return $.ajax({
+	        url: 'existMail',
+	        data: {
+	            mail: $emailSignUp.val()
+	        },
+	        type: 'GET',
+	        dataType: 'json'
+	    });
+	}
+	
+	function registerNewUser() {
+	    return $.ajax({
+	    	url: 'request/newUser',
+	        data: {
+	        	username: $username.val(),
+				email: $emailSignUp.val(),
+				password: $password.val(),
+				fname: $fName.val(),
+				lname: $lName.val(),
+				gender: gen,
+	        },
+	        type: 'POST',
+	        dataType: 'json',
+	    });
+	}
+	
+	function isEmpty(field, name){
+		var label = $("#" + name + "label");
+		if(field.length === 0){
+			label.removeClass("hidden");
+			label.text("This field is required");
+		}
+		else 
+			label.addClass("hidden");
+		return field.length === 0; 
+	}
+	
+	function isEmail(mail, name){
+		var label = $("#" + name + "label");
+		if(mail.search(emailRegEx) == -1){
+			label.removeClass("hidden");
+			label.text("Insert valid email address");
+		}
+		else 
+			label.addClass("hidden");
+		return mail.search(emailRegEx) !== -1;
+	}
+	
+	function isEqual(field1, field2, name){
+		var label = $("#" + name + "label");
+		if(field1 != field2){
+			label.removeClass("hidden");
+			label.text("Password must match");
+		}
+		else 
+			label.addClass("hidden");
+		return field1 === field2;
+	}
+	
+	function validateForm(fname, lname, user, email, password, cpassword){
+		return !isEmpty(fname, "fname") && !isEmpty(lname, "lname") && !isEmpty(user, "user") && !isEmpty(email, "mail") && isEmail(email, "mail") && !isEmpty(password, "pass") && !isEmpty(cpassword, "cpass") && isEqual(password, cpassword, "cpass");
+	}
 });
-

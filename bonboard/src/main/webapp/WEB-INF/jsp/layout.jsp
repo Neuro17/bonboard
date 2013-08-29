@@ -25,7 +25,6 @@
 		<div>
 			<script src="/bonboard/resources/js/vendor/jQuery.js"></script>
 			<script src="/bonboard/resources/js/vendor/bootstrap.min.js"></script>
-			<script src="/bonboard/resources/js/bootstrapValidation/jqBootstrapValidation.js"></script>
 			<script src="/bonboard/resources/js/vendor/tweetable.jquery.js"></script>
 			<script src="/bonboard/resources/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
 			<script src="/bonboard/resources/js/vendor/world-map.js"></script>

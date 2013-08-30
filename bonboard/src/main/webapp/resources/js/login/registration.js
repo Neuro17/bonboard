@@ -43,8 +43,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	
 		
 	$signBtn.on('click', function(){		
 		var user = $.trim($username.val()),
@@ -62,8 +60,9 @@ $(document).ready(function(){
 		if(validateForm(fname, lname, user, email, password, cpassword) && !mailErr && !userErr){
 			registerNewUser()
 			.done(function(r){
-				if(r)
+				if(r){
 //					window.location.replace("home"); //reindirizza alla home
+				}
 			})
 			.fail(function(){
 				//TODO

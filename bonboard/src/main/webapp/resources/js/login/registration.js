@@ -61,7 +61,7 @@ $(document).ready(function(){
 			registerNewUser()
 			.done(function(r){
 				if(r){
-//					window.location.replace("home"); //reindirizza alla home
+					window.location.replace("home"); //reindirizza alla home
 				}
 			})
 			.fail(function(){

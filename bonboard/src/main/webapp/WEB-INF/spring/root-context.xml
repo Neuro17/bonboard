@@ -80,7 +80,14 @@
  
  <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
    <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+ 	<property name="order" value="1" />
  </bean> 
+ 
+ <!-- UrlBasedViewResolver to Handle Redirects & Forward -->
+<bean id="urlViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+    <property name="order" value="2" />
+</bean>     
  
 		
 		

@@ -10,9 +10,9 @@
 
          <intercept-url pattern="/content/*" access="ROLE_USER" />
          <intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
-         
-
-        <form-login login-page="/home"  default-target-url="/login" authentication-failure-url="/loginfailed"/><!-- login-page="/login" -->
+         <intercept-url pattern="/register" access="ROLE_ANONYMOUS" />
+		<access-denied-handler error-page="/home" />
+        <form-login  login-page="/home"  default-target-url="/login" authentication-failure-url="/loginfailed"/><!-- login-page="/login" -->
         <logout logout-success-url="/logout" />
     </http>
 

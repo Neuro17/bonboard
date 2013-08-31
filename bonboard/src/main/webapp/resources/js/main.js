@@ -159,8 +159,10 @@ logButton.on('click', function(){
 			{ 	j_username: user.val() , j_password: pass.val() },
 				function(data){
 					console.log(data);
-					
-					 location.reload();
+					curPage = window.location.href.split("/");
+					location.reload();
+					if(curPage[4] == "register")
+						window.location.assign("http://localhost:8080/bonboard/home");
 					
 			});
 //				$(function() {

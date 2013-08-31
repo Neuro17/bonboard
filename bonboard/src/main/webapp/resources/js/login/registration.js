@@ -7,8 +7,7 @@ $(document).ready(function(){
 		$fName = $('#fname'),
 		$lName = $('#lname'),
 		emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-		mailErr = null,
-		userErr = null,
+		mailErr = userErr = null,
 		gen = "";
 
 	$username.on('blur', function(){

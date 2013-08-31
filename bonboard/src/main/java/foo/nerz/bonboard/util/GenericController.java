@@ -29,7 +29,7 @@ public class GenericController {
         return new ResponseEntity<String>( json, headers, HttpStatus.CREATED );
     }
     
-    private User getUsers(){
+    protected User getUsers(){
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof String){
 			return null;
 		}else{
@@ -80,12 +80,17 @@ public class GenericController {
 	 * corrente
 	 */
 	
-	
+	//BIAGIO qua setto le variabili in base alle quali si va a definire l'header
+    //per esempio alla variabile authenticated assegno il valore True
+    // a username assegno il valore dello username
+    // per vedere come sono usate nella jsp guarda in header.jsp
 	protected ModelAndView setHeader(ModelAndView model){
 		if(getUsers() == null)model.addObject("authenticated",Boolean.FALSE);
 		else{
+			//
 			model.addObject("authenticated",Boolean.TRUE);
 			model.addObject("username",getUsers().getUsername());
+			//
 		}
 		if(hasRole("ROLE_ADMIN")){
 			model.addObject("admin",Boolean.TRUE);

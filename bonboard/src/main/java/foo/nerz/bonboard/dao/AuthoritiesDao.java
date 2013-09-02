@@ -19,5 +19,7 @@ public interface AuthoritiesDao extends GenericDao<Authorities,String> {
 	public void saveA(Authorities a);
 
 	public abstract boolean existAuthByUser(Users u, String auth);
+	
+	public void changeAuthUser(String username);
 
 }

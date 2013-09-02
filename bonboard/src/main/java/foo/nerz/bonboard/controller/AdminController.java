@@ -4,12 +4,17 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import foo.nerz.bonboard.dao.AuthoritiesDao;
 import foo.nerz.bonboard.dao.UserDao;
 import foo.nerz.bonboard.entity.Users;
 import foo.nerz.bonboard.util.GenericController;
@@ -21,6 +26,9 @@ public class AdminController extends GenericController {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	AuthoritiesDao authDao;
 	
 	
 	// BIAGIO qua è dove dovrai settare le variabili della pagina!
@@ -77,6 +85,17 @@ public class AdminController extends GenericController {
 		return setHeader(model);
 
 		
+	}
+	
+	@RequestMapping(value = "/changeAuth", method = RequestMethod.GET)
+    public @ResponseBody ResponseEntity<String> existMail(@RequestParam(value="user", required=true) String user
+    							) {
+		logger.debug("Received request to change the auth of the user "+user);
+		
+		authDao.changeAuthUser(user);
+		
+		return createJsonResponse( true );
+
 	}
 	
 }

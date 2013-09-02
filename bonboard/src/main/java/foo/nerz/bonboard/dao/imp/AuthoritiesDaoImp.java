@@ -32,5 +32,14 @@ public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, String> implem
 	public void saveA(Authorities a) {
 		 getSessionFactory().getCurrentSession().save(a);		
 	}
+
+	@Override
+	@Transactional
+	public void changeAuthUser(String username) {
+		Authorities a=this.findById(username);
+		if(a.getAuthority().compareTo("ROLE_USER")==0)a.setAuthority("ROLE_ADMIN");
+		else a.setAuthority("ROLE_USER");
+		this.save(a);
+	}
 	
 }

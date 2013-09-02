@@ -121,8 +121,6 @@ public class Users {
 		this.email = email;
 	}
 
-
-
 	public String getFname() {
 		return fname;
 	}
@@ -153,6 +151,4 @@ public class Users {
 		this.gender = gender;
 	}
 	
-	
-
 }

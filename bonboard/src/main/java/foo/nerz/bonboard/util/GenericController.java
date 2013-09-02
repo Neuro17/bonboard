@@ -90,6 +90,7 @@ public class GenericController {
 			//
 			model.addObject("authenticated",Boolean.TRUE);
 			model.addObject("username",getUsers().getUsername());
+			
 			//
 		}
 		if(hasRole("ROLE_ADMIN")){

@@ -122,7 +122,7 @@ public class UserDaoImp extends GenericDaoImp<Users, String> implements UserDao 
 	@Transactional
 	public List<Users> getUsersEnabled() {
 		
-		return getSessionFactory().getCurrentSession().createQuery("From Users where Enablet= True").list();
+		return getSessionFactory().getCurrentSession().createQuery("From Users where Enabled= True").list();
 		
 		
 	}

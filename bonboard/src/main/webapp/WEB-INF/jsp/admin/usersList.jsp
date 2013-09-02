@@ -13,8 +13,6 @@
 	
 	Number of users: ${size}<br>
 	
-	<a
-	
 <table>
 	<tr>
 		<td width="100">First Name</td>
@@ -28,6 +26,7 @@
 		<td><c:out value="${user.getLname()}" /></td>	
 		<td><c:out value="${user.getUsername()}" /></td>
 		<td><c:out value="${user.getEmail()}" /></td>
+		<td> <button> Change privilege</button> </td>
 	</tr>
 	</c:forEach>
 </table> 

@@ -77,7 +77,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/admin/dashboard.jsp" />
     </definition>
     
+    <definition name="usersList" extends="base.definition">
+        <put-attribute name="title" value="BonBoard" />
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/usersList.jsp" />
+    </definition>
     
-
+    
 </tiles-definitions>
    

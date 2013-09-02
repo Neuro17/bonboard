@@ -101,7 +101,7 @@ public class LoginController extends GenericController {
 		else if(gender.compareTo("F") == 0)
 			gen = GenderEnum.F;
 		
-		Users u=new Users(username, password , true, email, lname, fname, gen);
+		Users u=new Users(username, password , true, email, fname, lname, gen);
 		Authorities a=new Authorities(u, "ROLE_USER");
 		
 		userDao.addUser(u);

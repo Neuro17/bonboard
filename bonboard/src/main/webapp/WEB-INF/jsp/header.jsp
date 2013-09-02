@@ -66,7 +66,7 @@
 <!--                 </form> -->
    <c:choose>
     <c:when test="${authenticated}" >
-         ${username}
+    	${username}
          <button id="logOutButt" type="button" class="btn">Logout</button>
 <%--          <a href="<c:url value="j_spring_security_logout" />" > </a> --%>
     </c:when>

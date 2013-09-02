@@ -1,5 +1,6 @@
 package foo.nerz.bonboard.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,44 @@ public class AdminController extends GenericController {
 		// con questa funzione recupero l'oggetto con i dati dell'utente
 		
 		Users u=userDao.findById(getUsers().getUsername());
+		List<Users> l=userDao.getUsersEnabled();
 		
 		//dopo li tiri fuori da u i dati
-		logger.debug(u.getEmail());
-		
+		logger.debug(u.getEmail());		
 		
 		ModelAndView model = new ModelAndView("dashboard");
+		model.addObject("fName",u.getFname());
+		model.addObject("lName",u.getLname());
+		model.addObject("size", l.size());
+		model.addObject("users", l);
 		
+		return setHeader(model);
+
+		
+	}
+	
+	@RequestMapping(value = "usersList", method = RequestMethod.GET)
+	public ModelAndView homeS(Locale locale) {
+		
+		logger.debug("##### Auth "+SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+		logger.debug("##### Auth "+SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()[0]);
+
+		// con questa funzione recupero l'oggetto con i dati dell'utente
+		
+		List<Users> l = userDao.getUsersEnabled();
+		
+		//dopo li tiri fuori da u i dati
+//		logger.debug(u.size());
+//		logger.debug(u.getUsername());
+//		logger.debug(u.getFname());
+		
+		
+		ModelAndView model = new ModelAndView("usersList");
+//		model.addObject("size", u.size());
+//		model.addObject("fName",u.getFname());
+//		model.addObject("lName",u.getLname());
+			model.addObject("size", l.size());
+			model.addObject("users", l);
 		
 		return setHeader(model);
 

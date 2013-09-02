@@ -59,6 +59,7 @@ public class AdminController extends GenericController {
 		// con questa funzione recupero l'oggetto con i dati dell'utente
 		
 		List<Users> l = userDao.getUsersEnabled();
+		logger.debug(l.get(0).getAuth().get(0).getAuthority());
 		
 		//dopo li tiri fuori da u i dati
 //		logger.debug(u.size());

@@ -19,6 +19,7 @@
 		<td width="150">Last Name</td>
 		<td width="150">Username</td>
 		<td width="150">Email address</td>
+		<td width="150">Role</td>
 	</tr>
 	<c:forEach items="${users}" var="user">
 	<tr>
@@ -26,6 +27,7 @@
 		<td><c:out value="${user.getLname()}" /></td>	
 		<td><c:out value="${user.getUsername()}" /></td>
 		<td><c:out value="${user.getEmail()}" /></td>
+		<td> <c:out value="${user.getAuth().get(0).getAuthority() }"/></td>
 		<td> <button> Change privilege</button> </td>
 	</tr>
 	</c:forEach>

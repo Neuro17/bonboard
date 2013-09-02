@@ -21,6 +21,7 @@ public class Authorities implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="username", referencedColumnName="username")
 	private Users username;
+
 	@Id
 	private String authority;
 
@@ -49,8 +50,5 @@ public class Authorities implements Serializable {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
-	}
-	
-	
-	
+	}	
 }

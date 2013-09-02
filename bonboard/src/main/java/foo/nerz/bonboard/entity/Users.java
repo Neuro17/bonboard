@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,7 +37,7 @@ public class Users {
 	@Column(name="gender")
 	private GenderEnum gender;
 	
-	@OneToMany(mappedBy="username",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="username",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Authorities> auth;
 	
 	public void addAuth(Authorities a){

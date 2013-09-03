@@ -8,9 +8,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <br><br>
 	Welcome ${username}<br>
-	First Name : ${fName}<br>
-	Last Name : ${lName}<br>
-	
 	Number of users: ${size}<br>
 	
 <table>
@@ -28,12 +25,22 @@
 		<td><c:out value="${user.getUsername()}" /></td>
 		<td><c:out value="${user.getEmail()}" /></td>
 		<td> <c:out value="${user.getAuth().get(0).getAuthority() }"/></td>
-		<td> <button> Change privilege</button> </td>
+		<td><button class="change-auth" id="${user.getUsername()}">Change privilege</button> </td>
 	</tr>
 	</c:forEach>
 </table> 
-	
-	
+<script src="/bonboard/resources/js/vendor/jQuery.js"></script>
+<script type="text/javascript">
+
+$(".change-auth").click(function(){
+    var username = $(this).attr("id");
+    jq.get("changeAuth", {user: username}, function(data){
+					console.log(data);
+	});
+});
+
+</script>	
+
         <!-- <div class="container">
             <div class="row">
                 <div class="main-panel span8">

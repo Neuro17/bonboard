@@ -13,7 +13,7 @@
 	
 	Number of users: ${size}<br>
 	
-	<a
+	<a href="/bonboard/admin/usersList">Users list</a>
 	
 <table>
 	<tr>

@@ -1,6 +1,8 @@
 package foo.nerz.bonboard.dao.imp;
 
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,10 +39,20 @@ public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, String> implem
 	@Override
 	@Transactional
 	public void changeAuthUser(String username) {
-		Authorities a=(Authorities) getSessionFactory().getCurrentSession().createQuery("From Authorities where Username="+username).list().get(0);
-		if(a.getAuthority().compareTo("ROLE_USER")==0)a.setAuthority("ROLE_ADMIN");
-		else a.setAuthority("ROLE_USER");
-		this.save(a);
+		Query query;
+		query=getSessionFactory().getCurrentSession().createQuery("From Authorities where Username=:username");
+		query.setParameter("username", username);
+		Authorities a=(Authorities) query.list().get(0);
+		log.debug(a.getAuthority());
+		if(a.getAuthority().compareTo("ROLE_USER")==0){
+			a.setAuthority("ROLE_ADMIN");
+			log.debug(a.getAuthority());
+		}
+		else 
+			a.setAuthority("ROLE_USER");
+		this.update(a);
+//		this.saveA(a);
+//		this.saveOrUpdate(a);
 	}
 	
 }

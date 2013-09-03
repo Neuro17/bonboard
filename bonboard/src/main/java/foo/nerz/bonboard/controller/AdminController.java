@@ -88,7 +88,7 @@ public class AdminController extends GenericController {
 	}
 	
 	@RequestMapping(value = "/changeAuth", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<String> existMail(@RequestParam(value="user", required=true) String user
+    public @ResponseBody ResponseEntity<String> existUsername(@RequestParam(value="user", required=true) String user
     							) {
 		logger.debug("Received request to change the auth of the user "+user);
 		

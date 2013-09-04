@@ -1,42 +1,61 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="datatables" uri="http://github.com/dandelion/datatables" %>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<br><br>
-	Welcome ${username}<br>
-	Number of users: ${size}<br>
-	
-<table>
-	<tr>
-		<td width="100">First Name</td>
-		<td width="150">Last Name</td>
-		<td width="150">Username</td>
-		<td width="150">Email address</td>
-		<td width="150">Role</td>
-	</tr>
-	<c:forEach items="${users}" var="user">
-	<tr>
-		<td><c:out value="${user.getFname()}" /></td>
-		<td><c:out value="${user.getLname()}" /></td>	
-		<td><c:out value="${user.getUsername()}" /></td>
-		<td><c:out value="${user.getEmail()}" /></td>
-		<td> <c:out value="${user.getAuth().get(0).getAuthority() }"/></td>
-		<td><button class="change-auth" id="${user.getUsername()}">Change privilege</button> </td>
-	</tr>
-	</c:forEach>
-</table> 
 <script src="/bonboard/resources/js/vendor/jQuery.js"></script>
+
+<div class="container">
+	<br><br>
+	Welcome ${username}<br>
+	Number of users: ${size}<br><br><br>
+	
+	<datatables:table id="UsersTable" data="${users}" cdn="true" row="user" sort="true" filter="true" theme="bootstrap2" cssClass="table table-striped">
+		<datatables:column title="First name" >
+		    <c:out value="${user.getFname()}"></c:out>
+		</datatables:column>
+		<datatables:column title="Last name">
+		    <c:out value="${user.getLname()}"></c:out>
+		</datatables:column>
+		<datatables:column title="Username">
+		    <c:out value="${user.getUsername()}"></c:out>
+		</datatables:column>
+		<datatables:column title="Mail">
+		    <c:out value="${user.getEmail()}"></c:out>
+		</datatables:column>
+		<datatables:column title="Role">
+		    <c:out value="${user.getAuth().get(0).getAuthority()}"></c:out>
+		</datatables:column>
+		<datatables:column title="">
+		    <button class="change-auth" id="${user.getUsername()}">Change privilege</button>
+		</datatables:column>
+    </datatables:table>
+</div><br><br><br>
+
+
+    
+   <%-- <datatables:column title="LastName" property="lastName" />
+   <datatables:column title="City" property="address.town.name" />
+   <datatables:column title="Mail" property="mail" /> --%>
+
+
+
+
 <script type="text/javascript">
 
-$(".change-auth").click(function(){
-    var username = $(this).attr("id");
-    jq.get("changeAuth", {user: username}, function(data){
-					console.log(data);
-	});
+$(document).ready(function(){
+	$(".change-auth").click(function(){
+	    var username = $(this).attr("id");
+	    jq.get("changeAuth", {user: username}, function(data){
+			if(data)
+				window.location.reload();
+		});
+	});	
 });
 
 </script>	

@@ -455,10 +455,15 @@ public class DaoTest {
 		
 		Authorities a=new Authorities(u, "PROVA");
 		
-		if(authDao.existAuthByUser(u, "PROVA"))authDao.delete(a);
+		if(authDao.existAuthByUser(u, "PROVA")){
+			a=authDao.getFirstByUsername(u.getUsername());
+			authDao.delete(a);
+			System.out.println("AAAAAAA LA BECCA");
+		}
 		
 		
-		authDao.saveA(a);
+		Long ID=authDao.save(a);
+		a.setId_auth(ID);
 		
 		assertTrue(authDao.existAuthByUser(u, "PROVA"));
 		
@@ -478,7 +483,7 @@ public class DaoTest {
 		u.setAuth(au);
 		
 		
-		usersDao.addUser(u);
+		usersDao.save(u);
 		
 		assertTrue(usersDao.existUsername("prova1"));
 		
@@ -522,5 +527,13 @@ public class DaoTest {
 		usersDao.addUser(u);
 
 	}
+		@Test
+		public void testAuthhh(){
+			Authorities a = authDao.listAll().get(0);
+
+			System.out.println("AAAAAAA "+a.getUsers().getUsername());
+			a.setAuthority("ROLE_TEST");
+			authDao.saveOrUpdate(a);
+		}
 	
 }

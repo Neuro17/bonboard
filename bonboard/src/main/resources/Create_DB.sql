@@ -25,13 +25,14 @@ INSERT INTO bonboard.users VALUES('admin','admin',true,'aa@bbn.it','admin','ruot
 INSERT INTO bonboard.users VALUES('user','user',true,'uu@bbn.it','usero','usurante', 'M');
       
 create table bonboard.authorities (
+      id_auth int not null primary key AUTO_INCREMENT,  
       username varchar(50) not null,
       authority varchar(50) not null,
       constraint fk_authorities_users foreign key(username) references bonboard.users(username) ON DELETE CASCADE);
 create unique index ix_auth_username on bonboard.authorities (username,authority);
 
-INSERT INTO bonboard.authorities VALUES ('admin','ROLE_ADMIN');
-INSERT INTO bonboard.authorities VALUES ('user','ROLE_USER');
+INSERT INTO bonboard.authorities (username , authority) VALUES ('admin','ROLE_ADMIN');
+INSERT INTO bonboard.authorities (username , authority) VALUES ('user','ROLE_USER');
 
 create table bonboard.tipo_post (
         id_tipo int not null primary key,

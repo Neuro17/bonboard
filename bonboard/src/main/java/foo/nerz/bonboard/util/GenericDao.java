@@ -110,4 +110,6 @@ public interface GenericDao<T, ID extends Serializable> {
    public long getMaxId(String idPropertyName) throws HibernateException;
    
    
+   public void merge(T entity) throws HibernateException;
+   
 }

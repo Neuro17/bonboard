@@ -9,8 +9,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -37,7 +42,8 @@ public class Users {
 	@Column(name="gender")
 	private GenderEnum gender;
 	
-	@OneToMany(mappedBy="username",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(orphanRemoval=true,cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="username")
 	private List<Authorities> auth;
 	
 	public void addAuth(Authorities a){
@@ -151,5 +157,5 @@ public class Users {
 	public void setGender(GenderEnum gender) {
 		this.gender = gender;
 	}
-	
+
 }

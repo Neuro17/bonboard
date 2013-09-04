@@ -11,7 +11,7 @@ import foo.nerz.bonboard.entity.Authorities;
 import foo.nerz.bonboard.entity.Users;
 import foo.nerz.bonboard.util.GenericDaoImp;
 
-public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, String> implements AuthoritiesDao {
+public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, Long> implements AuthoritiesDao {
 
 	
 	
@@ -23,11 +23,18 @@ public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, String> implem
 	@Override
 	@Transactional
 	public boolean existAuthByUser(Users u, String auth){
-		Authorities a =new Authorities(u, auth);
-		Authorities b=null;
-		b=(Authorities)getSessionFactory().getCurrentSession().get(Authorities.class, a);
-		if(b==null)return false;
-		else return true;
+		
+		List<Authorities> b=null;
+		Query query;
+		query=getSessionFactory().getCurrentSession().createQuery("From Authorities where Username=:username");
+		query.setParameter("username", u.getUsername());
+		b=(List<Authorities>)query.list();
+		if(b!=null && b.size()>0){
+			for (Authorities current : b){
+				if(current.getAuthority().compareTo(auth)==0) return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -53,6 +60,20 @@ public class AuthoritiesDaoImp extends GenericDaoImp<Authorities, String> implem
 		this.update(a);
 //		this.saveA(a);
 //		this.saveOrUpdate(a);
+	}
+
+	@Override
+	@Transactional
+	public Authorities getFirstByUsername(String username) {
+		List<Authorities> b=null;
+		Query query;
+		query=getSessionFactory().getCurrentSession().createQuery("From Authorities where Username=:username");
+		query.setParameter("username",username);
+		b=(List<Authorities>)query.list();
+		if(b!=null && b.size()>0){
+			return b.get(0);
+		}
+		return null;
 	}
 	
 }

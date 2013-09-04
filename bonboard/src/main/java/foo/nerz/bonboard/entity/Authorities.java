@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,12 +20,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name="authorities")
 public class Authorities implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
 	@Id
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="username", referencedColumnName="username")
+    @GeneratedValue(strategy = GenerationType.AUTO )
+    private Long id_auth; 
+	
+	@ManyToOne
+	@JoinColumn(name="username",referencedColumnName="username")
 	private Users username;
 
-	@Id
+	
 	private String authority;
 
 	
@@ -50,5 +62,17 @@ public class Authorities implements Serializable {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
-	}	
+	}
+
+	public Long getId_auth() {
+		return id_auth;
+	}
+
+	public void setId_auth(Long id_auth) {
+		this.id_auth = id_auth;
+	}
+
+
+	
+	
 }

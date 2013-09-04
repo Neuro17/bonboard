@@ -149,6 +149,10 @@ public abstract class GenericDaoImp<T, ID extends Serializable> implements Gener
 						
 			return count.longValue();
 	    }
+	    @Transactional
+	    public void merge(T entity) throws HibernateException{
+	    	getSessionFactory().getCurrentSession().merge(entity);
+	    }
 	    	    
 	}
 

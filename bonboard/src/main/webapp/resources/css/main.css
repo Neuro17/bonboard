@@ -142,6 +142,16 @@ text-shadow:none !important;
 .dropdown-menu::after, .dropdown-menu::before{
 	border:none !important;
 }
+
+.navbar .btn{
+	background: white !important;
+	
+}
+
+#logOutButt:hover {
+	cursor: pointer;
+}
+
 /* ==========================================================================
     end prova
    ========================================================================== */
@@ -215,6 +225,7 @@ p {
 i[class*=" icon-"] {
   position: relative;
   bottom: 1px;
+  padding-right: 4px;
 }
 /* ==========================================================================
     Global

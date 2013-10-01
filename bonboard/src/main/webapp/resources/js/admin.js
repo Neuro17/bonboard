@@ -6,7 +6,6 @@ jq(document).ready(function(){
 	}
 });
 
-
 var user=jq("#user");
 var pass=jq("#pass");
 var logButton = jq("#logButt");

@@ -116,7 +116,7 @@ jq(document).ready(function(){
 		switchLang("en");
 	});	
 	
-	var LIMIT = 4, START = 0;
+	var LIMIT = 5, START = 0;
 	var lastScrollTop = START, speedUp = START, speedDown = START;
 	jq(window).scroll(function(event){
 	   var st = jq(this).scrollTop();

@@ -56,6 +56,7 @@
                     <li id="blog" class=""><a href="/bonboard/blog">Blog</a></li>
                     <c:if test="${admin}">
                     	<li id="admin" class=""><a href="/bonboard/admin/dashboard">Admin</a></li>
+                    	<li id="admin" class=""><a href="/bonboard/admin/usersList">UsersList</a></li>
                     </c:if>
                 </ul>
 <!--                 <form class="navbar-form pull-right"> -->
@@ -66,9 +67,17 @@
 <!--                 </form> -->
    <c:choose>
     <c:when test="${authenticated}" >
-    	${username}
-         <button id="logOutButt" type="button" class="btn">Logout</button>
-<%--          <a href="<c:url value="j_spring_security_logout" />" > </a> --%>
+    	<div class="btn-group pull-right" id=user>
+			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			  ${username}
+			  <span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+			  <li><a id="logOutButt"><i class="icon-off icon-white"></i>Logout</a></li>
+			</ul>
+		</div>
+		
+		
     </c:when>
     <c:otherwise>
         <form class="navbar-form pull-right">
